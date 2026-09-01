@@ -186,6 +186,10 @@ class DashboardService:
         # model recommendation is transaction-context based, so retain one.
         return frame.drop_duplicates("transaction_id", keep="first").reset_index(drop=True)
 
+    def reset_to_default_dataset(self) -> None:
+        """Clear any stale active dataset so the dashboard falls back to the project evaluation artifacts."""
+        self._active_dataset = None
+
     def _active(self) -> dict[str, Any] | None:
         return self._active_dataset
 
