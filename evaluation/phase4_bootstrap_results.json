@@ -1,0 +1,60 @@
+{
+  "bootstrap_method": "transaction-level resampling with replacement; predictions reused without refitting",
+  "logistic_regression": {
+    "ci_95": [
+      0.3815261044176707,
+      0.43105756358768405
+    ],
+    "observed_rate": 0.4062918340026774
+  },
+  "n_bootstrap": 5000,
+  "random_forest": {
+    "ci_95": [
+      0.39022757697456495,
+      0.43977576974564897
+    ],
+    "observed_rate": 0.41566265060240964
+  },
+  "random_forest_minus_hist_gradient_boosting": {
+    "reason": "No fitted model or held-out row-level predictions were saved after the comparison experiment.",
+    "status": "unavailable"
+  },
+  "random_forest_minus_logistic_regression": {
+    "bootstrap_probability_greater_than_zero": 0.846,
+    "ci_95": [
+      -0.00870147255689424,
+      0.02677376171352075
+    ],
+    "observed_difference": 0.009370816599732268
+  },
+  "selection": [
+    {
+      "model": "Logistic Regression (original saved)",
+      "selected_candidate_success_rate": 0.4062918340026774,
+      "selected_retry_time_distribution": "{\"0.25\": 520, \"0.5\": 331, \"24.0\": 446, \"48.0\": 197}",
+      "status": "available"
+    },
+    {
+      "model": "Random Forest",
+      "selected_candidate_success_rate": 0.41566265060240964,
+      "selected_retry_time_distribution": "{\"0.25\": 376, \"0.5\": 313, \"1.0\": 82, \"2.0\": 7, \"4.0\": 37, \"6.0\": 10, \"12.0\": 55, \"24.0\": 470, \"48.0\": 131, \"72.0\": 13}",
+      "status": "available"
+    },
+    {
+      "model": "HistGradientBoosting",
+      "reason": "No fitted model or held-out row-level predictions were saved after the comparison experiment.",
+      "status": "unavailable"
+    },
+    {
+      "model": "Logistic Regression (enhanced experiment)",
+      "reason": "No separate fitted model or held-out row-level predictions were saved after the comparison experiment.",
+      "status": "unavailable"
+    }
+  ],
+  "source_sha256": "914d7a6966df589126557d95924eca6c168c6e4d8cff074facbfee2405b8e380",
+  "test_candidate_rows": 14940,
+  "test_transactions": 1494,
+  "validation_warnings": [
+    "Source has no hours_since_failure; candidate_retry_hours is the sole candidate-time feature."
+  ]
+}

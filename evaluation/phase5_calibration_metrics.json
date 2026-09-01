@@ -1,0 +1,36 @@
+{
+  "calibration_fit_transactions": 4483,
+  "calibration_validation_transactions": 1494,
+  "outer_test_calibrated_metrics": {
+    "brier_score": 0.14927477636679493,
+    "expected_calibration_error": 0.0489993022970658,
+    "log_loss": 0.5226706066006949,
+    "pr_auc": 0.40679859836669513,
+    "roc_auc": 0.743428931399013
+  },
+  "outer_test_candidate_rows": 14940,
+  "outer_test_transactions": 1494,
+  "outer_test_uncalibrated_metrics": {
+    "brier_score": 0.1955731646255219,
+    "expected_calibration_error": 0.22734855296516676,
+    "log_loss": 0.5787519041984384,
+    "pr_auc": 0.41908812391081024,
+    "roc_auc": 0.7458111430760214
+  },
+  "selected_method": "isotonic",
+  "selected_retry": {
+    "mean_calibrated_probability": 0.47321074952802356,
+    "mean_uncalibrated_probability": 0.6313163293578529,
+    "observed_success_rate": 0.4062918340026774,
+    "tier_boundaries": {
+      "low_to_medium": 0.39387060158910336,
+      "medium_to_high": 0.5485232067510548
+    }
+  },
+  "selection_rule": "lowest transaction-grouped calibration-validation Brier score; log loss and ECE tie-breaks",
+  "source_sha256": "914d7a6966df589126557d95924eca6c168c6e4d8cff074facbfee2405b8e380",
+  "validation_warnings": [
+    "Source has no hours_since_failure; candidate_retry_hours is the sole candidate-time feature.",
+    "The persisted Random Forest was trained on all training-side transactions, so calibration examples are not out-of-sample for the base model. No base-model out-of-fold probabilities were retained; this limitation may make calibration quality optimistic."
+  ]
+}

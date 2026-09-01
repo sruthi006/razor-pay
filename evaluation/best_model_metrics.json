@@ -1,0 +1,62 @@
+{
+  "best_model": "Random Forest",
+  "best_model_metrics": {
+    "accuracy": 0.7147925033467202,
+    "balanced_accuracy": 0.7047222759102301,
+    "f1": 0.5037847909630837,
+    "model": "Random Forest",
+    "parameters": "{\"class_weight\": \"balanced_subsample\", \"max_depth\": 20, \"max_features\": \"sqrt\", \"min_samples_leaf\": 12, \"n_estimators\": 120}",
+    "pr_auc": 0.41908812391081024,
+    "precision": 0.39761029411764703,
+    "recall": 0.6873212583412774,
+    "roc_auc": 0.7458111430760214,
+    "test_candidate_rows": 14940,
+    "test_transactions": 1494,
+    "top_choice_mean_predicted_probability": 0.6352021955236676,
+    "top_choice_observed_success_rate": 0.41566265060240964,
+    "train_cv_roc_auc": 0.7457059807388191
+  },
+  "engineered_features": [
+    "decline_reason \u00d7 candidate_retry_hours",
+    "payment_method \u00d7 candidate_retry_hours",
+    "log(amount_inr)",
+    "amount_band",
+    "customer_previous_success_rate / (1 + customer_previous_failure_count)",
+    "cyclic failure hour, day of week, and candidate-derived retry hour"
+  ],
+  "excluded_columns": [
+    "retry_success",
+    "transaction_id",
+    "customer_id",
+    "decline_bucket",
+    "failure_timestamp",
+    "hours_since_failure",
+    "retry_attempt_number"
+  ],
+  "features": [
+    "decline_reason",
+    "payment_method",
+    "amount_inr",
+    "hour_of_day",
+    "day_of_month",
+    "day_of_week",
+    "candidate_retry_hours",
+    "customer_previous_success_rate",
+    "customer_previous_failure_count",
+    "days_since_last_successful_payment"
+  ],
+  "majority_class_baseline_accuracy": 0.7893574297188755,
+  "selection_basis": "0.60 * held-out ROC-AUC + 0.40 * held-out selected-candidate success rate; hyperparameters tuned only by train grouped CV",
+  "split": {
+    "group_column": "transaction_id",
+    "held_out_fold": 1,
+    "method": "StratifiedGroupKFold",
+    "n_splits": 5,
+    "test_transactions": 1494,
+    "train_transactions": 5977,
+    "transaction_overlap": 0
+  },
+  "validation_warnings": [
+    "Source has no hours_since_failure; candidate_retry_hours is the sole candidate-time feature."
+  ]
+}

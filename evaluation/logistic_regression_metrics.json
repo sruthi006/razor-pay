@@ -1,0 +1,55 @@
+{
+  "engineered_features": [
+    "decline_reason_retry_time = decline_reason \u00d7 candidate_retry_hours"
+  ],
+  "excluded_columns": [
+    "retry_success",
+    "transaction_id",
+    "customer_id",
+    "decline_bucket",
+    "failure_timestamp",
+    "hours_since_failure",
+    "retry_attempt_number"
+  ],
+  "features": [
+    "decline_reason",
+    "payment_method",
+    "amount_inr",
+    "hour_of_day",
+    "day_of_month",
+    "day_of_week",
+    "candidate_retry_hours",
+    "customer_previous_success_rate",
+    "customer_previous_failure_count",
+    "days_since_last_successful_payment"
+  ],
+  "metrics": {
+    "accuracy": 0.791566265060241,
+    "f1": 0.2215,
+    "precision": 0.5193434935521688,
+    "recall": 0.1407689863361932,
+    "roc_auc": 0.7504394669935424,
+    "test_candidate_rows": 14940,
+    "test_transactions": 1494,
+    "top_choice_mean_predicted_probability": 0.40818296612939386,
+    "top_choice_observed_success_rate": 0.4062918340026774
+  },
+  "model": "LogisticRegression",
+  "model_configuration": {
+    "max_iter": 1000,
+    "random_state": 42,
+    "solver": "lbfgs"
+  },
+  "split": {
+    "group_column": "transaction_id",
+    "held_out_fold": 1,
+    "method": "StratifiedGroupKFold",
+    "n_splits": 5,
+    "test_transactions": 1494,
+    "train_transactions": 5977,
+    "transaction_overlap": 0
+  },
+  "validation_warnings": [
+    "Source has no hours_since_failure; candidate_retry_hours is the sole candidate-time feature."
+  ]
+}

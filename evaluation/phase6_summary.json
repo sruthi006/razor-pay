@@ -1,0 +1,51 @@
+{
+  "bootstrap": {
+    "fixed_recovered_inr_ci_95": [
+      15706020.596,
+      18168560.11125
+    ],
+    "incremental_recovered_inr_ci_95": [
+      5699561.175000003,
+      8512409.414500002
+    ],
+    "incremental_recovery_rate_ci_95": [
+      0.12167045910855306,
+      0.1511176549324053
+    ],
+    "method": "transaction-level bootstrap with replacement",
+    "n_resamples": 5000,
+    "probability_smart_retry_inr_greater_than_fixed": 1.0,
+    "probability_smart_retry_recovery_rate_greater_than_fixed": 1.0,
+    "smart_retry_recovered_inr_ci_95": [
+      22612231.607,
+      25465638.686249997
+    ]
+  },
+  "selection_diagnostics": {
+    "pct_recommendations_at_24_48_72": 0.34439834024896265,
+    "pct_recommendations_outside_24_48_72": 0.6556016597510373,
+    "recovery_rate_inside_fixed_schedule_times": 0.458997279440342,
+    "recovery_rate_outside_fixed_schedule_times": 0.5630869742752144
+  },
+  "source_sha256": "914d7a6966df589126557d95924eca6c168c6e4d8cff074facbfee2405b8e380",
+  "summary": {
+    "eligible_transactions": 7471,
+    "fixed_average_recovered_transaction_value": 5801.64286742035,
+    "fixed_recovered_inr": 16934995.53,
+    "fixed_recovered_transactions": 2919,
+    "fixed_recovery_rate": 0.3907107482264757,
+    "fixed_unrecovered_inr": 29247797.5,
+    "incremental_recovered_inr": 7089855.519999996,
+    "incremental_recovered_transactions": 1020,
+    "incremental_recovery_rate": 0.1365279079105876,
+    "recovered_inr_lift_pct": 0.4186511598093109,
+    "smart_average_recovered_transaction_value": 6099.225958365067,
+    "smart_recovered_inr": 24024851.049999997,
+    "smart_recovered_transactions": 3939,
+    "smart_recovery_rate": 0.5272386561370633,
+    "smart_unrecovered_inr": 22157941.980000004
+  },
+  "validation_warnings": [
+    "Authoritative dataset does not contain hours_since_failure; candidate_retry_hours is used as the documented v1 time feature."
+  ]
+}

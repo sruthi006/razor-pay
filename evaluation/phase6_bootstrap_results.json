@@ -1,0 +1,22 @@
+{
+  "fixed_recovered_inr_ci_95": [
+    15706020.596,
+    18168560.11125
+  ],
+  "incremental_recovered_inr_ci_95": [
+    5699561.175000003,
+    8512409.414500002
+  ],
+  "incremental_recovery_rate_ci_95": [
+    0.12167045910855306,
+    0.1511176549324053
+  ],
+  "method": "transaction-level bootstrap with replacement",
+  "n_resamples": 5000,
+  "probability_smart_retry_inr_greater_than_fixed": 1.0,
+  "probability_smart_retry_recovery_rate_greater_than_fixed": 1.0,
+  "smart_retry_recovered_inr_ci_95": [
+    22612231.607,
+    25465638.686249997
+  ]
+}
