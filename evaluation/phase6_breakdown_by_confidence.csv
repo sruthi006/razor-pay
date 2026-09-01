@@ -1,0 +1,4 @@
+smart_retry_confidence,eligible_transactions,baseline_recovered_transactions,smart_retry_recovered_transactions,baseline_recovered_inr,smart_retry_recovered_inr,incremental_inr,baseline_recovery_rate,smart_retry_recovery_rate
+High,2531,649,1839,2779881.36,10775141.94,7995260.58,0.25642038719873567,0.726590280521533
+Low,3315,1493,1203,11171081.18,8613519.89,-2557561.29,0.4503770739064857,0.36289592760180994
+Medium,1625,777,897,2984032.99,4636189.22,1652156.23,0.47815384615384615,0.552

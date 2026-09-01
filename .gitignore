@@ -43,6 +43,14 @@ evaluation/outputs/
 evaluation/*.csv
 evaluation/*.png
 !evaluation/.gitkeep
+!evaluation/fixed_schedule_baseline_summary.csv
+!evaluation/phase6_breakdown_by_amount_band.csv
+!evaluation/phase6_breakdown_by_confidence.csv
+!evaluation/phase6_breakdown_by_decline_bucket.csv
+!evaluation/phase6_breakdown_by_decline_reason.csv
+!evaluation/phase6_breakdown_by_payment_method.csv
+!evaluation/phase6_retry_time_distribution.csv
+!evaluation/phase6_transaction_comparison.csv
 
 # IDE / OS
 .idea/

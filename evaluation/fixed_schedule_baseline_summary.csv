@@ -1,0 +1,10 @@
+metric,value
+total_failed_transactions,10000.0
+eligible_soft_retry_transactions,7471.0
+recovered_transactions,2919.0
+unrecovered_lost_transactions_all_failed,7081.0
+unrecovered_lost_transactions_eligible,4552.0
+recovered_inr,16934995.53
+unrecovered_lost_inr_all_failed,45038044.95999999
+recovery_rate_eligible,0.3907107482264757
+recovery_rate_all_failed,0.2919

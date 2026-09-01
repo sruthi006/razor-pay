@@ -1,0 +1,2 @@
+decline_bucket,eligible_transactions,baseline_recovered_transactions,smart_retry_recovered_transactions,baseline_recovered_inr,smart_retry_recovered_inr,incremental_inr,baseline_recovery_rate,smart_retry_recovery_rate
+SOFT_RETRY,7471,2919,3939,16934995.53,24024851.05,7089855.52,0.3907107482264757,0.5272386561370633
