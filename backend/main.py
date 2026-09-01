@@ -90,6 +90,7 @@ async def lifespan(app: FastAPI):
     dashboard_service = DashboardService(settings.evaluation_dir)
     model_service = ModelService(settings.calibrated_model_path)
     audit_service = AuditService(dashboard_service)
+    dashboard_service.reset_to_default_dataset()
     app.state.dashboard_service = dashboard_service
     app.state.model_service = model_service
     app.state.audit_service = audit_service

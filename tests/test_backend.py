@@ -33,6 +33,30 @@ def test_dashboard_uses_validated_artifacts() -> None:
     assert response.json()["smart_recovery_transactions"] == 3939
 
 
+def test_dashboard_resets_stale_inference_dataset_to_validated_artifacts() -> None:
+    service = app.state.dashboard_service
+    service._active_dataset = {
+        "source": "upload",
+        "dataset_id": "stale-upload",
+        "dataset_label": "Selected uploaded CSV",
+        "raw_rows": [],
+        "inference": {"results": []},
+        "comparison": None,
+        "transactions": [],
+        "observed_outcome_data_available": False,
+    }
+    service.reset_to_default_dataset()
+
+    with TestClient(app) as client:
+        response = client.get("/api/dashboard")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["outcome_data_available"] is True
+    assert payload["dataset_source"] == "evaluation_artifacts"
+    assert payload["dataset_label"] == "Validated demo evaluation dataset"
+
+
 def test_frontend_spa_routes_and_assets_are_served() -> None:
     with TestClient(app) as client:
         root = client.get("/")
