@@ -30,7 +30,12 @@ import type {
 export const API_BASE_URL: string =
   (import.meta.env["VITE_API_BASE_URL"] as string | undefined)?.replace(/\/$/, "") ?? "";
 
-export const USING_MOCK_DATA = API_BASE_URL === "";
+const USE_MOCK_DATA_FLAG =
+  import.meta.env["VITE_USE_MOCK_DATA"] === true ||
+  import.meta.env["VITE_USE_MOCK_DATA"] === "true" ||
+  import.meta.env["VITE_USE_MOCK_DATA"] === "1";
+
+export const USING_MOCK_DATA = USE_MOCK_DATA_FLAG;
 
 export const ENDPOINTS = {
   dashboard: "/api/dashboard",

@@ -1,8 +1,8 @@
 import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
-import { existsSync, readFileSync } from 'node:fs';
+import { readFile, readdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
+import { dirname, join, relative } from 'node:path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const serverEntry = join(__dirname, '.output', 'server', 'index.mjs');
@@ -11,6 +11,38 @@ const port = Number(process.env.PORT || 3001);
 
 const serverModule = await import('file://' + serverEntry);
 const handler = serverModule.default || serverModule;
+
+async function findMatchingPublicAsset(requestedPath) {
+  const requestedFile = requestedPath.split('/').pop() || '';
+  if (!requestedFile || !requestedFile.includes('.')) {
+    return null;
+  }
+
+  const extension = requestedFile.slice(requestedFile.lastIndexOf('.') + 1).toLowerCase();
+  const stem = requestedFile.slice(0, requestedFile.lastIndexOf('.'));
+  const prefix = stem.split('-')[0] || stem;
+
+  if (!prefix) {
+    return null;
+  }
+
+  const candidates = [];
+  for (const entry of await readdir(publicDir, { recursive: true })) {
+    if (!entry.includes('.') || !entry.endsWith(`.${extension}`)) {
+      continue;
+    }
+    const fileName = entry.split(/\\|\//).pop() || '';
+    if (fileName.startsWith(`${prefix}-`) && fileName.endsWith(`.${extension}`)) {
+      candidates.push(join(publicDir, entry));
+    }
+  }
+
+  if (!candidates.length) {
+    return null;
+  }
+
+  return candidates[0] || null;
+}
 
 const assetHandler = {
   async fetch(request) {
@@ -35,7 +67,23 @@ const assetHandler = {
         headers: { 'content-type': typeMap[extension] || 'application/octet-stream' },
       });
     } catch {
-      return new Response('Not found', { status: 404 });
+      const fallbackPath = await findMatchingPublicAsset(relativePath);
+      if (!fallbackPath || !existsSync(fallbackPath)) {
+        return new Response('Not found', { status: 404 });
+      }
+      const content = await readFile(fallbackPath);
+      const extension = fallbackPath.split('.').pop()?.toLowerCase();
+      const typeMap = {
+        js: 'application/javascript; charset=utf-8',
+        css: 'text/css; charset=utf-8',
+        html: 'text/html; charset=utf-8',
+        svg: 'image/svg+xml',
+        ico: 'image/x-icon',
+        txt: 'text/plain; charset=utf-8',
+      };
+      return new Response(content, {
+        headers: { 'content-type': typeMap[extension] || 'application/octet-stream' },
+      });
     }
   },
 };

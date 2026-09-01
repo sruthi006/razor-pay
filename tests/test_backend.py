@@ -1,8 +1,23 @@
 import io
+from pathlib import Path
 
 from fastapi.testclient import TestClient
 
 from backend.main import app
+
+
+def _public_asset_path() -> str:
+    assets_dir = (
+        Path(__file__).resolve().parents[1]
+        / "frontend"
+        / "smart-retry-bloom-main"
+        / ".output"
+        / "public"
+        / "assets"
+    )
+    js_files = sorted(assets_dir.glob("*.js"))
+    assert js_files, "No built frontend JS assets found under .output/public/assets"
+    return f"/assets/{js_files[0].name}"
 
 
 VALID_REQUEST = {
@@ -58,10 +73,11 @@ def test_dashboard_resets_stale_inference_dataset_to_validated_artifacts() -> No
 
 
 def test_frontend_spa_routes_and_assets_are_served() -> None:
+    asset_path = _public_asset_path()
     with TestClient(app) as client:
         root = client.get("/")
         dataset = client.get("/dataset-selection")
-        asset = client.get("/assets/index-CEqqj9Tm.js")
+        asset = client.get(asset_path)
 
     assert root.status_code == 200
     assert "text/html" in root.headers["content-type"]
