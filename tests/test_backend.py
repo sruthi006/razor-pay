@@ -33,6 +33,21 @@ def test_dashboard_uses_validated_artifacts() -> None:
     assert response.json()["smart_recovery_transactions"] == 3939
 
 
+def test_frontend_spa_routes_and_assets_are_served() -> None:
+    with TestClient(app) as client:
+        root = client.get("/")
+        dataset = client.get("/dataset-selection")
+        asset = client.get("/assets/index-CEqqj9Tm.js")
+
+    assert root.status_code == 200
+    assert "text/html" in root.headers["content-type"]
+    assert "Smart Retry" in root.text
+    assert dataset.status_code == 200
+    assert "text/html" in dataset.headers["content-type"]
+    assert asset.status_code == 200
+    assert "javascript" in asset.headers["content-type"]
+
+
 def test_prediction_returns_all_candidate_scores() -> None:
     with TestClient(app) as client:
         response = client.post("/api/predict", json=VALID_REQUEST)

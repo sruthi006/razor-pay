@@ -24,9 +24,16 @@ class Settings:
     def source_dataset_path(self) -> Path:
         return self.project_root / "data" / "raw" / "final_prototype_100k_corrected.csv"
 
+    @property
+    def frontend_build_dir(self) -> Path:
+        return self.project_root / "frontend" / "smart-retry-bloom-main" / ".output" / "public"
+
 
 def get_settings() -> Settings:
     root = Path(__file__).resolve().parents[1]
-    configured = os.getenv("FRONTEND_ORIGIN", "http://localhost:8080")
+    configured = os.getenv(
+        "FRONTEND_ORIGIN",
+        "http://localhost:5173,http://localhost:8080,http://localhost:3000",
+    )
     origins = tuple(origin.strip() for origin in configured.split(",") if origin.strip())
     return Settings(project_root=root, frontend_origins=origins)
